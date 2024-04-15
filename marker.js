@@ -26,7 +26,15 @@ const bookmarkInput = bookmarksForm.querySelector('input[type]');
 function createBookmark(e) {
     e.preventDefault();
 
-    console.log('prosessing form')
+    const title = bookmarkInput.value;
+    const bookmark = document.createElement('a');
+
+    bookmark.className = 'bookmark';
+    bookmark.innerText = title;
+    bookmark.href = '#';
+    bookmark.target = '_blank';
+    console.log(bookmark);
+
 }
 
 bookmarksForm.addEventListener('submit', createBookmark);
