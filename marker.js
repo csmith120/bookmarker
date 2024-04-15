@@ -11,3 +11,22 @@ function closeFloater() {
         body.classList.remove('show-floater');
     }
 }
+
+
+input.addEventListener('focusin', showFloater);
+input.addEventListener('focusin', closeFloater);
+overlay.addEventListener('click', closeFloater);
+
+//=========
+
+const bookmarksList = document.querySelector('.bookmark-list');
+const bookmarksForm = document.querySelector('.bookmark-form');
+const bookmarkInput = bookmarksForm.querySelector('input[type]');
+
+function createBookmark(e) {
+    e.preventDefault();
+
+    console.log('prosessing form')
+}
+
+bookmarksForm.addEventListener('submit', createBookmark);
