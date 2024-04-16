@@ -14,14 +14,14 @@ function closeFloater() {
 
 
 input.addEventListener('focusin', showFloater);
-input.addEventListener('focusin', closeFloater);
+input.addEventListener('focusout', closeFloater);
 overlay.addEventListener('click', closeFloater);
 
 //=========
 
 const bookmarksList = document.querySelector('.bookmarks-list');
 const bookmarkForm = document.querySelector('.bookmark-form');
-const bookmarkInput = bookmarkForm.querySelector('input[type]');
+const bookmarkInput = bookmarkForm.querySelector('input[type=text]');
 const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
 
 fillBookmarksList(bookmarks);
@@ -56,7 +56,7 @@ function fillBookmarksList(bookmarks = []) {
     const bookmarksHtml = bookmarks.map((bookmark) => {
         return `
         <a href="#" class="bookmark">
-        ${bookmarks[i].title}
+        ${bookmark.title}
         </a>
         `;
     }).join('');
@@ -75,7 +75,7 @@ function fillBookmarksList(bookmarks = []) {
 }
 
 function storeBookmarks(bookmarks = []) {
-    localStorage.setItem('bookmarks', bookmarks);
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 }
 
 bookmarkForm.addEventListener('submit', createBookmark);
