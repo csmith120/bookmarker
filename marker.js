@@ -19,9 +19,9 @@ overlay.addEventListener('click', closeFloater);
 
 //=========
 
-const bookmarksList = document.querySelector('.bookmark-list');
-const bookmarksForm = document.querySelector('.bookmark-form');
-const bookmarkInput = bookmarksForm.querySelector('input[type]');
+const bookmarksList = document.querySelector('.bookmarks-list');
+const bookmarkForm = document.querySelector('.bookmark-form');
+const bookmarkInput = bookmarkForm.querySelector('input[type]');
 
 function createBookmark(e) {
     e.preventDefault();
@@ -33,8 +33,9 @@ function createBookmark(e) {
     bookmark.innerText = title;
     bookmark.href = '#';
     bookmark.target = '_blank';
-    console.log(bookmark);
+    bookmarksList.appendChild(bookmark);
 
+    bookmarkForm.reset();
 }
 
-bookmarksForm.addEventListener('submit', createBookmark);
+bookmarkForm.addEventListener('submit', createBookmark);
