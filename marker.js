@@ -22,7 +22,9 @@ overlay.addEventListener('click', closeFloater);
 const bookmarksList = document.querySelector('.bookmarks-list');
 const bookmarkForm = document.querySelector('.bookmark-form');
 const bookmarkInput = bookmarkForm.querySelector('input[type]');
-const bookmarks =[];
+const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+
+fillBookmarksList(bookmarks);
 
 function createBookmark(e) {
     e.preventDefault();
