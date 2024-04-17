@@ -1,7 +1,7 @@
 body, .jumbotron {padding: 30px;}
 
 body{
-    background-image: url(andre-benz-sLokLIacItI-unsplash.jpg);
+    background-image: url(./img/andre-benz-sLokLIacItI-unsplash.jpg);
     background-size: cover;
 }
 
@@ -75,7 +75,7 @@ position: relative;
 }
 
 .bookmark{
-    display: block;
+    display: flex;
     background: #fff;
     color: #999;
     padding: 20px;
@@ -98,4 +98,33 @@ position: relative;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom: 0;
+}
+
+.bookmark .img {
+    background-color: #ddd;
+    border-radius: 3px;
+    background-image: url(./img/tj-holowaychuk-1EYMue_AwDw-unsplash.jpg);
+    background-size: cover;
+    width: 80px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.bookmark .title {
+    display: flex;
+    align-items: center;
+}
+
+.bookmark .glyphicon-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #eee;
+    font-size: 12px;
+    transition: 0.3s ease color;
+    cursor: pointer;
+}
+
+.bookmark:hover .glyphicon-remove {
+    color: #aaa;
 }

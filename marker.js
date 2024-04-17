@@ -56,7 +56,9 @@ function fillBookmarksList(bookmarks = []) {
     const bookmarksHtml = bookmarks.map((bookmark) => {
         return `
         <a href="#" class="bookmark">
-        ${bookmark.title}
+        <div class="img"></div>
+        <div class="title">${bookmark.title}</div>
+        <span class="glyphicon glyphicon-remove"></span>
         </a>
         `;
     }).join('');
