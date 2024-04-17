@@ -106,7 +106,8 @@ position: relative;
     border-radius: 3px;
     background-image: url(./img/tj-holowaychuk-1EYMue_AwDw-unsplash.jpg);
     background-size: cover;
-    width: 80px;
+    background-position: top center;
+    width: 120px;
     height: 60px;
     margin-right: 20px;
 }

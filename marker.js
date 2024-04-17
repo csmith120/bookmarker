@@ -14,7 +14,7 @@ function closeFloater() {
 
 
 input.addEventListener('focusin', showFloater);
-input.addEventListener('focusout', closeFloater);
+//input.addEventListener('focusout', closeFloater);
 overlay.addEventListener('click', closeFloater);
 
 //=========
@@ -23,22 +23,45 @@ const bookmarksList = document.querySelector('.bookmarks-list');
 const bookmarkForm = document.querySelector('.bookmark-form');
 const bookmarkInput = bookmarkForm.querySelector('input[type=text]');
 const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+const apiUrl = 'https://opengraph.io/api/1.0/site';
+const appId = 'fe267273-3b6e-47e7-b238-2314df0c025f';
+
+
 
 fillBookmarksList(bookmarks);
 
 function createBookmark(e) {
     e.preventDefault();
 
+    if (!bookmarkInput.value){
+        alert('we need info');
+        return;
+    }
+    const url = encodeURIComponent(bookmarkInput.value);
     //add a new bookmark to bookmark
-    const title = bookmarkInput.value;
-    const bookmark ={
-        title: title
-    };
+    fetch(`${apiUrl}/${url}?app_id=${appId}`)
+    .then(response => response.json())
+    .then (data => {
 
-    bookmarks.push(bookmark);
-    fillBookmarksList(bookmarks);
-    storeBookmarks(bookmarks);
-    bookmarkForm.reset();
+        const bookmark ={
+            title: data.hybridGraph.title,
+            image: data.hybridGraph.image,
+            link: data.hybridGraph.url
+        };
+    
+        bookmarks.push(bookmark);
+        fillBookmarksList(bookmarks);
+        storeBookmarks(bookmarks);
+        bookmarkForm.reset();
+    });
+
+    .catch(error => {
+        alert('there was a promblem getting info')
+    });
+
+
+
+   
     // save that bookmark to local storage
 
     //const title = bookmarkInput.value;
@@ -55,8 +78,8 @@ function fillBookmarksList(bookmarks = []) {
 
     const bookmarksHtml = bookmarks.map((bookmark, i) => {
         return `
-        <a href="#" class="bookmark" data-id="${i}">
-        <div class="img"></div>
+        <a href="${bookmark.link}" class="bookmark" data-id="${i}">
+        <div class="img" style="background-image:url('${bookmark.image}')"></div>
         <div class="title">${bookmark.title}</div>
         <span class="glyphicon glyphicon-remove"></span>
         </a>
@@ -81,7 +104,7 @@ function removeBookmark(e) {
     if (!e.target.matches('.glyphicon-remove')) return;
 
     const index = e.target.parentNode.dataset.id;
-    bookmarks.splice(index);
+    bookmarks.splice(index, 1);
     fillBookmarksList(bookmarks);
     storeBookmarks(bookmarks);
 }
