@@ -53,9 +53,9 @@ function createBookmark(e) {
 
 function fillBookmarksList(bookmarks = []) {
 
-    const bookmarksHtml = bookmarks.map((bookmark) => {
+    const bookmarksHtml = bookmarks.map((bookmark, i) => {
         return `
-        <a href="#" class="bookmark">
+        <a href="#" class="bookmark" data-id="${i}">
         <div class="img"></div>
         <div class="title">${bookmark.title}</div>
         <span class="glyphicon glyphicon-remove"></span>
@@ -76,8 +76,19 @@ function fillBookmarksList(bookmarks = []) {
 
 }
 
+function removeBookmark(e) {
+
+    if (!e.target.matches('.glyphicon-remove')) return;
+
+    const index = e.target.parentNode.dataset.id;
+    bookmarks.splice(index);
+    fillBookmarksList(bookmarks);
+    storeBookmarks(bookmarks);
+}
+
 function storeBookmarks(bookmarks = []) {
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 }
 
 bookmarkForm.addEventListener('submit', createBookmark);
+bookmarksList.addEventListener('click', removeBookmark);
