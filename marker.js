@@ -53,10 +53,10 @@ function createBookmark(e) {
         fillBookmarksList(bookmarks);
         storeBookmarks(bookmarks);
         bookmarkForm.reset();
-    });
+    })
 
     .catch(error => {
-        alert('there was a promblem getting info')
+        alert('there was a promblem getting info');
     });
 
 
